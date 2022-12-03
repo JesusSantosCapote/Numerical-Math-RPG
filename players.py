@@ -1,6 +1,8 @@
 class Player:
     experience_threshold = () #Rellenar en algun punto
 
+    name = ''
+
     armors = []
 
     skills = []

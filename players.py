@@ -34,6 +34,8 @@ class Player:
     def level_up(self):
         self.__level += 1
 
+    
+
 
 class Warrior(Player):
     pass

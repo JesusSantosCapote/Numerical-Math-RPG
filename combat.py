@@ -3,11 +3,21 @@ import time
 import random
 from players import Player
 
+def to_dict(player):
+    player_dict = {}
+    player_dict['life'] = player.life
+    player_dict['']
+    
+
 class Combat:
     def __init__ (self, player1:Player, player2:Player):
         self.player1 = player1
         self.player2 = player2
+        self.player1_in_combat = player1.__dict__
+        self.player2_in_combat = player2.__dict__
         self.turn = 0
+        self.player1_states = []
+        self.player2_states = []
         self.end = False
 
     def get_answer(self, player, start_time, solution):
@@ -64,23 +74,16 @@ class Combat:
                     print("Now a random player will atack first")
                     first_one_to_attack = random.choice([self.player1, self.player2])
                     break
- 
-
-                
-                    
-                
+            
         
 
-                    
-
-
-
-            
-
-    def playTurn(self):
-        playerturn = "Player 1" if self.turn % 2 == 0 else "Player2"
-        action = input(f"Is the turn of {playerturn}\nWhat do you like to do? \nAttack(1) \nUse Skill(2)" )
-
+    def playTurn(self, player):
+        action = input(f"Is the turn of {player.name}\nWhat do you like to do? \nAttack(1) \nUse Skill(2)")
+        print(f"Your stats are:\n Life: {player['life']}")
+        if action == '1':
+            for i in range(len(player.attacks)):
+                print(f"")
+        
 
 
 # myCombat = Combat(players.Player(), players.Player())

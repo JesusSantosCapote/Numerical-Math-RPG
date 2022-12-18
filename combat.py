@@ -74,15 +74,104 @@ class Combat:
                     print("Now a random player will atack first")
                     first_one_to_attack = random.choice([self.player1, self.player2])
                     break
-            
+            self.playTurn(self, first_one_to_attack)
+            if not self.end:
+                if self.player1 == first_one_to_attack:
+                    self.playTurn(self, self.player2)
+                else:
+                    self.playTurn(self, self.player1)
+
+
+    def calculateDamage(self, player : Player, attack_selected): #NOT IMPLEMENTED YET
+        raise NotImplementedError        
         
 
-    def playTurn(self, player):
+    def playTurn(self, player : Player):
         action = input(f"Is the turn of {player.name}\nWhat do you like to do? \nAttack(1) \nUse Skill(2)")
         print(f"Your stats are:\n Life: {player['life']}")
+
+
         if action == '1':
+            print('Select your attack. Select 0 to return')
             for i in range(len(player.attacks)):
-                print(f"")
+                if player.attacks[i][2] > player.level:
+                    break
+                print(f"{i+1}) {player.attacks[i][1]}")
+                max_selection=i+1
+            while True:
+                attack_selection = input()
+                if attack_selection > max_selection:
+                    print("Invalid Input")
+                else:
+                    break
+            if attack_selection == 0:
+                return self.playTurn(self, player)
+            else:
+                damage = self.calculateDamage(self, player, attack_selection-1)
+                if self.player1 == player:
+                    self.player2_in_combat['life'] = self.player2_in_combat['life'] - damage
+                    if self.player2_in_combat['life']<0:
+                        self.end = True
+                else:
+                    self.player1_in_combat['life'] = self.player1_in_combat['life'] - damage
+                    if self.player1_in_combat['life'] < 0:
+                        self.end = True
+
+        elif action == '2':
+            print('Select your skill. Select 0 to return')
+            for i in range(len(player.skills)):
+                if player.skill[i][2] > player.level:
+                    break
+                print(f"{i+1}) {player.skills[i][1]}")
+                max_selection=i+1
+            while True:
+                skill_selection = input()
+                if skill_selection > max_selection:
+                    print("Invalid Input")
+                else:
+                    break
+            if skill_selection == 0:
+                return self.playTurn(self, player)
+            else:
+                player.skills[skill_selection-1](self,player)
+            
+            print("Now you most attack")
+
+            print('Select your attack.')
+            for i in range(len(player.attacks)):
+                if player.attacks[i][2] > player.level:
+                    break
+                print(f"{i+1}) {player.attacks[i][1]}")
+                max_selection=i+1
+            while True:
+                attack_selection = input()
+                if attack_selection > max_selection:
+                    print("Invalid Input")
+                else:
+                    break
+
+            damage = self.calculateDamage(self, player, attack_selection-1)
+            if self.player1 == player:
+                self.player2_in_combat['life'] = self.player2_in_combat['life'] - damage
+                if self.player2_in_combat['life']<0:
+                    self.end = True
+            else:
+                self.player1_in_combat['life'] = self.player1_in_combat['life'] - damage
+                if self.player1_in_combat['life'] < 0:
+                    self.end = True
+
+
+
+        else:
+            print('Invalid input')
+            return self.playTurn(self, player)
+
+
+            
+
+
+
+
         
 
 

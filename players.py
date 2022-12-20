@@ -34,7 +34,7 @@ class Warrior(Player):
         self.epsilon = 1e-5
         self.life = 25
         self.damage = 10
-        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
+        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1), (secant, "Secant", 6), (regulaFalsi,"Regula Falsi",12)]
         self.experience = 0
         self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 
@@ -51,7 +51,7 @@ class Rogue(Player):
         self.epsilon = 1e-2
         self.life = 18
         self.damage = 6
-        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
+        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1), (secant, "Secant", 4), (steffensen_algorithm, "Steffensen", 10)]
         self.experience = 0
         self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 

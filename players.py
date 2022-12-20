@@ -40,9 +40,6 @@ class Warrior(Player):
         self.experience_threshold = [0, 10, 25, 45, 70]
 
 
-
-
-
 class Rogue(Player):
 
     def __init__(self, name):
@@ -70,6 +67,3 @@ class Wizard(Player):
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
         self.experience_threshold = [0, 10, 25, 45, 70]
-        
-
-    

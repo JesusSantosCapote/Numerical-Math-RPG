@@ -1,4 +1,4 @@
-import functions
+from functions import *
 
 class Player:
 
@@ -21,7 +21,18 @@ class Player:
 
 
 class Warrior(Player):
-    pass
+    
+    def __init__(self, name):
+        self.name=name
+        self.armors = [(lambda x : x**2,"y=x^2",1), (lambda x : x**3, "y=x^3",1)]
+        self.skills = []
+        self.level = 1
+        self.epsilon = 1e-3
+        self.life = 25
+        self.damage = 10
+        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
+        self.experience = 0
+        self.experience_threshold = [0, 10, 25, 45, 70]
 
 class Rogue(Player):
     pass

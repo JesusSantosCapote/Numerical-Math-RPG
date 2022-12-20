@@ -1,15 +1,10 @@
 import keyboard
 import time
 import random
-from players import Player
+from players import *
 from trivia import generate_trivia
 import functions
 
-def to_dict(player):
-    player_dict = {}
-    player_dict['life'] = player.life
-    player_dict['']
-    
 
 class Combat:
     def __init__ (self, player1:Player, player2:Player):
@@ -28,35 +23,37 @@ class Combat:
             if solution == input():
                 return player
             else:
-                print(f"Wrong answer, now {self.player2.name if player == self.player1 else self.player1.name} can answer it in {300 - time.time() - start_time if 300 - time.time() - start_time > 0 else 30} seconds")   
+                wrong = True
+                print(f"Wrong answer, now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")   
                 break
-        print(f"Time over. Now {self.player2.name if player == self.player1 else self.player1.name} can answer it in {300 - time.time() - start_time if 300 - time.time() - start_time > 0 else 30} seconds")
-        left_time = 300 - time.time() - start_time if 300 - time.time() - start_time > 0 else 30
+        if not wrong:
+            print(f"Time over. Now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")
+        left_time = 300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30
         actual_time = time.time()
         while time.time() - actual_time < left_time:
             if solution == input():
-                return self.player1 if player == self.player2 else self.player2
+                return self.player1_in_combat if player == self.player2_in_combat else self.player2_in_combat
             else:
                 print("Wrong answer too. Now a random player will attack first")
-                return random.choice([self.player1,self.player2])
+                return random.choice([self.player1_in_combat,self.player2_in_combat])
         print("Time over. Now a random player will attack first")
-        return random.choice([self.player1,self.player2])
+        return random.choice([self.player1_in_combat,self.player2_in_combat])
 
     def play(self):
         while not self.end:
             print(f"{self.player1_in_combat.name}, what armor do you like to use?")
 
-            for i in range(len(self.player1_in_combat.armors)):
+            for i in range(len(self.player1_in_combat.armors)): #TODO: Only show armors in your current level
                 print(f"{i} : {self.player1_in_combat.armors[i][1]}")
 
-            self.player1_armor = self.player1_in_combat.armors[int(input())]
+            self.player1_armor = self.player1_in_combat.armors[int(input())][0]
 
             print(f"{self.player2_in_combat.name}, what armor do you like to use?")
 
             for i in range(len(self.player2_in_combat.armors)):
                 print(f"{i} : {self.player2_in_combat.armors[i][1]}")
 
-            self.player2_armor = self.player2_in_combat.armors[int(input())]
+            self.player2_armor = self.player2_in_combat.armors[int(input())][0]
             first_one_to_attack = None
             trivia = generate_trivia()
             print(trivia[0])
@@ -76,19 +73,23 @@ class Combat:
                     print("Now a random player will atack first")
                     first_one_to_attack = random.choice([self.player1_in_combat, self.player2_in_combat])
                     break
-            self.playTurn(self, first_one_to_attack)
+            self.playTurn(first_one_to_attack)
             if not self.end:
                 if self.player1_in_combat == first_one_to_attack:
-                    self.playTurn(self, self.player2_in_combat)
+                    self.playTurn(self.player2_in_combat)
                 else:
-                    self.playTurn(self, self.player1_in_combat)
+                    self.playTurn(self.player1_in_combat)
 
 
     def calculateDamage(self, player : Player, attack_selected):
-        if player == self.player1:
-            damage = player.attacks[attack_selected](self.player2_armor,player.epsilon,player.damage)
+        if player == self.player1_in_combat:
+            toprint, armor_value = player.attacks[attack_selected][0](self.player2_armor,player.epsilon,player.damage)
+            print(toprint)
+            damage = player.damage- armor_value
         else:
-            damage = player.attacks[attack_selected](self.player1_armor,player.epsilon,player.damage)
+            toprint, armor_value = player.attacks[attack_selected][0](self.player1_armor,player.epsilon,player.damage)
+            print(toprint)
+            damage = player.damage- armor_value
         return damage
 
     def playTurn(self, player : Player):
@@ -104,16 +105,16 @@ class Combat:
                 print(f"{i+1}) {player.attacks[i][1]}")
                 max_selection=i+1
             while True:
-                attack_selection = input()
+                attack_selection = int(input())
                 if attack_selection > max_selection:
                     print("Invalid Input")
                 else:
                     break
             if attack_selection == 0:
-                return self.playTurn(self, player)
+                return self.playTurn(player)
             else:
-                damage = self.calculateDamage(self, player, attack_selection-1)
-                if self.player1 == player:
+                damage = self.calculateDamage(player, attack_selection-1)
+                if self.player1_in_combat == player:
                     self.player2_in_combat.life = self.player2_in_combat.life - damage
                     if self.player2_in_combat.life<=0:
                         self.end = True
@@ -138,7 +139,7 @@ class Combat:
             if skill_selection == 0:
                 return self.playTurn(self, player)
             else:
-                player.skills[skill_selection-1](self,player)
+                player.skills[skill_selection-1][0](self,player)
             
             print("Now you most attack")
 
@@ -170,3 +171,9 @@ class Combat:
         else:
             print('Invalid input')
             return self.playTurn(self, player)
+
+
+Chuchi = Warrior("Chuchi")
+Kuco = Warrior("Kuco")
+Combate_Epico = Combat(Chuchi, Kuco)
+Combate_Epico.play()

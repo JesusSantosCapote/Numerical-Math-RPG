@@ -6,7 +6,7 @@ def bisection(fun, eps, steps): #Para el warrior
     x_b = float(input("Enter the second extreme of the interval"))
     if fun(x_a) * fun(x_b) >= 0:
         print("The bisection method cannot be applied")
-        return None
+        return "Zero not found", steps
     
     steps_calculated = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))
     if steps_calculated >= steps:
@@ -16,7 +16,7 @@ def bisection(fun, eps, steps): #Para el warrior
         x_m = (x_a + x_b) / 2
         
         if fun(x_m) == 0:
-            return x_m
+            return x_m, n
         
         if fun(x_a) * fun(x_m) < 0:
             x_b = x_m

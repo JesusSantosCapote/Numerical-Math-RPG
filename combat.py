@@ -44,16 +44,33 @@ class Combat:
             print(f"{self.player1_in_combat.name}, what armor do you like to use?")
 
             for i in range(len(self.player1_in_combat.armors)): #TODO: Only show armors in your current level
+                if self.player1_in_combat.armors[i][2]>self.player1_in_combat.level:
+                    break
                 print(f"{i} : {self.player1_in_combat.armors[i][1]}")
-
-            self.player1_armor = self.player1_in_combat.armors[int(input())][0]
+                max_selection=i
+            while True:
+                armor_selection = int(input())
+                if armor_selection > max_selection:
+                    print("Invalid Input")
+                else:
+                    break
+            self.player1_armor = self.player1_in_combat.armors[armor_selection][0]
 
             print(f"{self.player2_in_combat.name}, what armor do you like to use?")
 
             for i in range(len(self.player2_in_combat.armors)):
+                if self.player2_in_combat.armors[i][2]>self.player2_in_combat.level:
+                    break
                 print(f"{i} : {self.player2_in_combat.armors[i][1]}")
-
-            self.player2_armor = self.player2_in_combat.armors[int(input())][0]
+                max_selection = i
+            while True:
+                armor_selection = int(input())
+                if armor_selection > max_selection:
+                    print("Invalid Input")
+                else:
+                    break
+            self.player1_armor = self.player2_in_combat.armors[armor_selection][0]
+            
             first_one_to_attack = None
             trivia = generate_trivia()
             print(trivia[0])

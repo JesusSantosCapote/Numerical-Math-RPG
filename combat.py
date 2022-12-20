@@ -18,6 +18,20 @@ class Combat:
         self.end = False
         self.winner = None
 
+    def clean_status(self, player: Player):
+        if player == self.player1_in_combat:
+            self.player1_states.clear()
+            self.player1_in_combat.damage = self.player1.damage
+            self.player1_in_combat.epsilon = self.player1.epsilon
+        else:
+            self.player2_states.clear()
+            self.player2_in_combat.damage = self.player2.damage
+            self.player2_in_combat.epsilon = self.player2.epsilon
+
+
+
+
+
     def get_answer(self, player, start_time, solution):
         actual_time = time.time()
         while time.time() - actual_time < 30:
@@ -94,9 +108,13 @@ class Combat:
             self.playTurn(first_one_to_attack)
             if not self.end:
                 if self.player1_in_combat == first_one_to_attack:
+                    self.clean_status(self.player1_in_combat)
                     self.playTurn(self.player2_in_combat)
+                    self.clean_status(self.player2_in_combat)
                 else:
+                    self.clean_status(self.player2_in_combat)
                     self.playTurn(self.player1_in_combat)
+                    self.clean_status(self.player1_in_combat)
         return self.winner
 
 
@@ -165,7 +183,7 @@ class Combat:
                 max_selection=i+1
             while True:
                 skill_selection = input()
-                if skill_selection > max_selection:
+                if skill_selection > max_selection: #TODO: Improve bobos-catcher
                     print("Invalid Input")
                 else:
                     break
@@ -192,13 +210,13 @@ class Combat:
             damage = self.calculateDamage(self, player, attack_selection-1)
             if self.player1 == player:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
-                if self.player2_in_combat.life<0:
+                if self.player2_in_combat.life < 0 or (self.player1_states.__contains__("Culling Blade") and self.player2_in_combat.life <= damage):
                     self.end = True
                     self.winner = self.player1
                     print(f"That was an epic combat! {player.name} has emerged victorious")
             else:
                 self.player1_in_combat.life = self.player1_in_combat.life - damage
-                if self.player1_in_combat.life < 0:
+                if self.player1_in_combat.life < 0 or (self.player2_states.__contains__("Culling Blade") and self.player1_in_combat.life <= damage):
                     self.end = True
                     self.winner = self.player2
                     print(f"That was an epic combat! {player.name} has emerged victorious")

@@ -75,14 +75,14 @@ class Wizard(Player):
         return f"Wizard of level {self.level}"
 
 #Code for manual introduction of players with level 10
-#Kuco = Warrior("Kuco")
-#Kuco.get_exp(29)
-#save_profile(Kuco)
-#Chuchi = Wizard("Chuchi")
-#Chuchi.get_exp(25)
-#save_profile(Chuchi)
-#Pillo = Rogue("Pillo")
-#Pillo.get_exp(21)
-#save_profile(Pillo)
+Kuco = Warrior("Kuco")
+Kuco.get_exp(29)
+save_profile(Kuco)
+Chuchi = Wizard("Chuchi")
+Chuchi.get_exp(25)
+save_profile(Chuchi)
+Pillo = Rogue("Pillo")
+Pillo.get_exp(21)
+save_profile(Pillo)
 
     

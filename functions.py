@@ -79,7 +79,7 @@ def regulaFalsi( fun, eps, steps):
         return "Zero not found", steps
      
      
-    for i in range(steps):
+    for i in range(steps + 1):
          
         # Find the point that touches x axis
         x_c = (x_a * fun(x_b) - x_b * fun(x_a))/ (fun(x_b) - fun(x_a))
@@ -103,7 +103,7 @@ def regulaFalsiHamming (fun, eps, steps):
         return "Zero not found", steps
 
      
-    for i in range(steps):
+    for i in range(steps + 1):
         
         x_m = (x_a +x_b)/2
         if fun(x_m) < (fun(x_a) + fun(x_b)) / 2:
@@ -135,7 +135,7 @@ def steffensen_algorithm(f, eps, steps):
         # found!
         return x_n, 0
 
-    for i in range(steps):
+    for i in range(steps + 1):
         g = (f(x_n + f(x_n))) / f(x_n) - 1
         try:
             x_n -= (f(x_n)) / (g * x_n)

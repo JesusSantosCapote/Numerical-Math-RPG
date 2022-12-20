@@ -67,7 +67,7 @@ class Wizard(Player):
         self.epsilon = 1e-4
         self.life = 10
         self.damage = 8
-        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
+        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1), (secant, "Secant", 5), (regulaFalsiHamming, "Hamming Regula Falsi", 11)]
         self.experience = 0
         self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 

@@ -1,38 +1,21 @@
+import functions
+
 class Player:
-    experience_threshold = [] # List of int, each position contains experiencie needed to reach index level
 
-    name = '' #string
-
-    armors = [] # List of Tuple: [function, string representation, level needed]
-
-    skills = [] # List of Tuple: [function, string representation, level needed]
-
-    __level = 1
-
-    epsilon = 1e-2
-
-    @property #float
-    def life(self):
-        raise NotImplementedError()
-
-    @property #float
-    def damage(self):
-        raise NotImplementedError()
-
-    @property
-    def level(self): #int
-        return self.__level
-
-    @property
-    def attacks(self):  # List of Tuple: [function, string representation, level needed]
-        raise NotImplementedError()
-
-    @property
-    def experience(self): #int
-        raise NotImplementedError()
-
-    def level_up(self):
-        self.__level += 1
+    def __init__(self, name, armors, skills, level, epsilon, life, damage, attacks, experiencie, experience_threshold):
+        self.name = name
+        self.armors = armors
+        self.skills = skills
+        self.level = level
+        self.epsilon = epsilon
+        self.life = life
+        self.damage = damage
+        self.attacks = attacks
+        self.experience = experiencie
+        self.experience_threshold = experience_threshold
+        
+    def Clone (self):
+        return Player(self.name, self.armors, self.skills, self.level, self.epsilon, self.life, self.damage, self.attacks, self.experience, self. experience_threshold)
 
     
 

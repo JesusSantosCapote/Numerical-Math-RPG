@@ -1,4 +1,5 @@
 from functions import *
+from armors import *
 
 class Player:
 
@@ -24,7 +25,7 @@ class Warrior(Player):
     
     def __init__(self, name):
         self.name=name
-        self.armors = [(lambda x : x**2,"y=x^2",1), (lambda x : x**3, "y=x^3",1)]
+        self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1)]
         self.skills = []
         self.level = 1
         self.epsilon = 1e-3

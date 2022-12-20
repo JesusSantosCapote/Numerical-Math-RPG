@@ -69,8 +69,8 @@ class Combat:
                     print("Invalid Input")
                 else:
                     break
-            self.player1_armor = self.player2_in_combat.armors[armor_selection][0]
-            
+            self.player2_armor = self.player2_in_combat.armors[armor_selection][0]
+
             first_one_to_attack = None
             trivia = generate_trivia()
             print(trivia[0])

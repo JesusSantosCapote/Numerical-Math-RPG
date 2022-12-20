@@ -16,6 +16,7 @@ class Combat:
         self.player1_states = []
         self.player2_states = []
         self.end = False
+        self.winner = None
 
     def get_answer(self, player, start_time, solution):
         actual_time = time.time()
@@ -96,6 +97,7 @@ class Combat:
                     self.playTurn(self.player2_in_combat)
                 else:
                     self.playTurn(self.player1_in_combat)
+        return self.winner
 
 
     def calculateDamage(self, player : Player, attack_selected):
@@ -145,11 +147,13 @@ class Combat:
                     self.player2_in_combat.life = self.player2_in_combat.life - damage
                     if self.player2_in_combat.life<=0:
                         self.end = True
+                        self.winner = self.player1
                         print(f"That was an epic combat! {self.player1} has emerged victorious")
                 else:
                     self.player1_in_combat.life = self.player1_in_combat.life - damage
                     if self.player1_in_combat.life <= 0:
                         self.end = True
+                        self.winner = self.player2
                         print(f"That was an epic combat! {self.player2} has emerged victorious")                      
 
         elif action == '2':
@@ -190,21 +194,17 @@ class Combat:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
                 if self.player2_in_combat.life<0:
                     self.end = True
-                    print(f"That was an epic combat! {self.player1} has emerged victorious")
+                    self.winner = self.player1
+                    print(f"That was an epic combat! {player.name} has emerged victorious")
             else:
                 self.player1_in_combat.life = self.player1_in_combat.life - damage
                 if self.player1_in_combat.life < 0:
                     self.end = True
-                    print(f"That was an epic combat! {self.player2} has emerged victorious")
+                    self.winner = self.player2
+                    print(f"That was an epic combat! {player.name} has emerged victorious")
 
 
 
         else:
             print('Invalid input')
             return self.playTurn(self, player)
-
-
-Chuchi = Warrior("Chuchi")
-Kuco = Warrior("Kuco")
-Combate_Epico = Combat(Chuchi, Kuco)
-Combate_Epico.play()

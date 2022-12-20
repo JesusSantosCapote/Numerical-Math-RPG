@@ -20,13 +20,30 @@ class Player:
 
     def get_exp(self, experience_gained): #TODO: Check max level index
         self.experience = self.experience + experience_gained
-        for i in range (self.experience_threshold):
-            if self.experience<self.experience_threshold[i]:
-                self.level = i
-
+        for i in range (len(self.experience_threshold)):
+            if self.experience>self.experience_threshold[i]:
+                self.level = i+1
+                break
 
 class Warrior(Player):
     
+    def __init__(self, name):
+        self.name=name
+        self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1)]
+        self.skills = []
+        self.level = 1
+        self.epsilon = 1e-3
+        self.life = 9
+        self.damage = 10
+        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
+        self.experience = 0
+        self.experience_threshold = [0, 3, 8, 15, 25]
+
+    def __str__(self) -> str:
+        return f"Warrior of level {self.level}"
+
+class Rogue(Player):
+
     def __init__(self, name):
         self.name=name
         self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1)]
@@ -37,31 +54,15 @@ class Warrior(Player):
         self.damage = 10
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
-        self.experience_threshold = [0, 10, 25, 45, 70]
+        self.experience_threshold = [0, 3, 8, 15, 25]
 
-
-
-
-
-class Rogue(Player):
-
-    def __init__(self, name):
-        self.name=name
-        self.armors = [(lambda x : x**2,"y=x^2",1), (lambda x : x**3, "y=x^3",1)]
-        self.skills = []
-        self.level = 1
-        self.epsilon = 1e-3
-        self.life = 25
-        self.damage = 10
-        self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
-        self.experience = 0
-        self.experience_threshold = [0, 10, 25, 45, 70]
-
+    def __str__(self) -> str:
+        return f"Rogue of level {self.level}"
 
 class Wizard(Player):
     def __init__(self, name):
         self.name=name
-        self.armors = [(lambda x : x**2,"y=x^2",1), (lambda x : x**3, "y=x^3",1)]
+        self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1)]
         self.skills = []
         self.level = 1
         self.epsilon = 1e-3
@@ -69,7 +70,11 @@ class Wizard(Player):
         self.damage = 10
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
-        self.experience_threshold = [0, 10, 25, 45, 70]
+        self.experience_threshold = [0, 3, 8, 15, 25]
+
+    def __str__(self) -> str:
+        return f"Wizard of level {self.level}"
+
         
 
     

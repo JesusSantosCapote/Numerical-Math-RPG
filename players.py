@@ -66,7 +66,7 @@ class Wizard(Player):
         self.skills = [(heal, "Heal", 1), (precision_buff, "Precision buffer", 1)]
         self.level = 1
         self.epsilon = 1e-4
-        self.life = 10
+        self.life = 12
         self.damage = 8
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1), (secant, "Secant", 5), (regulaFalsiHamming, "Hamming Regula Falsi", 11)]
         self.experience = 0

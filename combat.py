@@ -177,12 +177,12 @@ class Combat:
         elif action == '2':
             print('Select your skill. Select 0 to return')
             for i in range(len(player.skills)):
-                if player.skill[i][2] > player.level:
+                if player.skills[i][2] > player.level:
                     break
                 print(f"{i+1}) {player.skills[i][1]}")
                 max_selection=i+1
             while True:
-                skill_selection = input()
+                skill_selection = int(input())
                 if skill_selection > max_selection: #TODO: Improve bobos-catcher
                     print("Invalid Input")
                 else:
@@ -194,20 +194,33 @@ class Combat:
             
             print("Now you most attack")
 
+            print(f"{player.name}'s states:\n Life: {player.life}\n Damage: {player.damage}\n Epsilon: {player.epsilon}")
+            if player == self.player1_in_combat:
+                print(self.player1_states)
+                print(f"{self.player2_in_combat.name}'s states:\n Life: {self.player2_in_combat.life}\n Damage: {self.player2_in_combat.damage}\n Epsilon: {self.player2_in_combat.epsilon}")
+                print(self.player2_states)
+            else:
+                print(self.player2_states)
+                print(f"{self.player1_in_combat.name}'s states:\n Life: {self.player1_in_combat.life}\n Damage: {self.player1_in_combat.damage}\n Epsilon: {self.player1_in_combat.epsilon}")
+                print(self.player2_states)
+
             print('Select your attack.')
+
+
+
             for i in range(len(player.attacks)):
                 if player.attacks[i][2] > player.level:
                     break
                 print(f"{i+1}) {player.attacks[i][1]}")
                 max_selection=i+1
             while True:
-                attack_selection = input()
+                attack_selection = int(input())
                 if attack_selection > max_selection:
                     print("Invalid Input")
                 else:
                     break
 
-            damage = self.calculateDamage(self, player, attack_selection-1)
+            damage = self.calculateDamage(player, attack_selection-1)
             if self.player1 == player:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
                 if self.player2_in_combat.life < 0 or (self.player1_states.__contains__("Culling Blade") and self.player2_in_combat.life <= damage):
@@ -220,8 +233,6 @@ class Combat:
                     self.end = True
                     self.winner = self.player2
                     print(f"That was an epic combat! {player.name} has emerged victorious")
-
-
 
         else:
             print('Invalid input')

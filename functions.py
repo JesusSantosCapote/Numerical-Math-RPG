@@ -1,6 +1,9 @@
 import math
+from scipy import misc
 
-def bisection(fun, x_a, x_b, eps=None, steps=10): #Para el warrior
+def bisection(fun, eps): #Para el warrior
+    x_a = input("Enter the first extreme of the interval")
+    x_b = input("Enter the second extreme of the interval")
     if fun(x_a) * fun(x_b) >= 0:
         print("The bisection method cannot be applied")
         return None
@@ -21,7 +24,7 @@ def bisection(fun, x_a, x_b, eps=None, steps=10): #Para el warrior
         else:
             x_a = x_m
     
-    return (x_a + x_b) / 2
+    return (x_a + x_b) / 2 , steps
 
 
 def newton(fun, der, x_n, epsilon=1e-6, steps=50):   #Este esta bueno para el Rogue porque es rapido

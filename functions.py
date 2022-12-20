@@ -1,5 +1,6 @@
 import math
 from scipy import misc
+import numpy as np
 
 def bisection(fun, eps, steps): #Para el warrior
     x_a = float(input("Enter the first extreme of the interval\n"))
@@ -64,3 +65,44 @@ def secant(fun, x_a, x_b, steps=50):
             x_a = x_n
     return x_n
 
+
+def regulaFalsi( a , b):
+    if func(a) * func(b) >= 0:
+        print("You have not assumed right a and b")
+        return -1
+     
+    c = a # Initialize result
+     
+    for i in range(MAX_ITER):
+         
+        # Find the point that touches x axis
+        c = (a * func(b) - b * func(a))/ (func(b) - func(a))
+         
+        # Check if the above found point is root
+        if func(c) == 0:
+            break
+         
+        # Decide the side to repeat the steps
+        elif func(c) * func(a) < 0:
+            b = c
+        else:
+            a = c
+    print("The value of root is : " , '%.4f' %c)
+
+
+def puntofijo(gx,a,tolera, iteramax = 15):
+    i = 1 # iteración
+    b = gx(a)
+    tramo = abs(b-a)
+    while(tramo>=tolera and i<=iteramax ):
+        a = b
+        b = gx(a)
+        tramo = abs(b-a)
+        i = i + 1
+    respuesta = b
+    
+    # Validar respuesta
+    if (i>=iteramax ):
+        respuesta = np.nan
+    return(respuesta)
+    

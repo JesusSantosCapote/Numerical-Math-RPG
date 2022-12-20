@@ -20,3 +20,4 @@ def load_profile(player_name):
         return "Profile not found"
 
     return data
+

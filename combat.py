@@ -188,7 +188,7 @@ class Combat:
                 else:
                     break
             if skill_selection == 0:
-                return self.playTurn(self, player)
+                return self.playTurn(player)
             else:
                 player.skills[skill_selection-1][0](self,player)
             
@@ -223,17 +223,17 @@ class Combat:
             damage = self.calculateDamage(player, attack_selection-1)
             if self.player1_in_combat == player:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
-                if self.player2_in_combat.life < 0 or (self.player1_states.__contains__("Culling Blade") and self.player2_in_combat.life <= damage):
+                if self.player2_in_combat.life < 0 or (self.player1_states.__contains__("Culling Blade") and self.player2_in_combat.life <= damage and not print("The culling blade has succeded!!")):
                     self.end = True
                     self.winner = self.player1
                     print(f"That was an epic combat! {player.name} has emerged victorious")
             else:
                 self.player1_in_combat.life = self.player1_in_combat.life - damage
-                if self.player1_in_combat.life < 0 or (self.player2_states.__contains__("Culling Blade") and self.player1_in_combat.life <= damage):
+                if self.player1_in_combat.life < 0 or (self.player2_states.__contains__("Culling Blade") and self.player1_in_combat.life <= damage and not print("The cullling blade has succeded!!")):
                     self.end = True
                     self.winner = self.player2
                     print(f"That was an epic combat! {player.name} has emerged victorious")
 
         else:
             print('Invalid input')
-            return self.playTurn(self, player)
+            return self.playTurn(player)

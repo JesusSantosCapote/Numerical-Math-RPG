@@ -202,7 +202,7 @@ class Combat:
             else:
                 print(self.player2_states)
                 print(f"{self.player1_in_combat.name}'s states:\n Life: {self.player1_in_combat.life}\n Damage: {self.player1_in_combat.damage}\n Epsilon: {self.player1_in_combat.epsilon}")
-                print(self.player2_states)
+                print(self.player1_states)
 
             print('Select your attack.')
 

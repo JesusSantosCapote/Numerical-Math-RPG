@@ -66,43 +66,79 @@ def secant(fun, x_a, x_b, steps=50):
     return x_n
 
 
-def regulaFalsi( a , b):
-    if func(a) * func(b) >= 0:
-        print("You have not assumed right a and b")
-        return -1
+def regulaFalsi( fun, eps, steps):
+
+    x_a = float(input("Enter the first extreme of the interval\n"))
+    x_b = float(input("Enter the second extreme of the interval\n"))
+    if fun(x_a) * fun(x_b) >= 0:
+        print("The regula-falsi method cannot be applied")
+        return "Zero not found", steps
      
-    c = a # Initialize result
      
-    for i in range(MAX_ITER):
+    for i in range(steps):
          
         # Find the point that touches x axis
-        c = (a * func(b) - b * func(a))/ (func(b) - func(a))
+        x_c = (x_a * fun(x_b) - x_b * fun(x_a))/ (fun(x_b) - fun(x_a))
          
         # Check if the above found point is root
-        if func(c) == 0:
-            break
+        if fun(x_c) <= eps:
+            return x_c, i
          
         # Decide the side to repeat the steps
-        elif func(c) * func(a) < 0:
-            b = c
+        elif fun(x_c) * fun(x_a) < 0:
+            x_b = x_c
         else:
-            a = c
-    print("The value of root is : " , '%.4f' %c)
+            x_a = x_c
+    return "Zero not found", steps
+
+def regulaFalsiHamming (fun, eps, steps):
+    x_a = float(input("Enter the first extreme of the interval\n"))
+    x_b = float(input("Enter the second extreme of the interval\n"))
+    if fun(x_a) * fun(x_b) >= 0:
+        print("The regula falsi hamming method cannot be applied")
+        return "Zero not found", steps
+
+     
+    for i in range(steps):
+        
+        x_m = (x_a +x_b)/2
+        if fun(x_m) < (fun(x_a) + fun(x_b)) / 2:
+            x_c = (x_a * fun(x_b)/2 - x_b * fun(x_a))/ fun(x_b)/2 - fun(x_a)
+        else:
+            x_c = (x_a * fun(x_b) - x_b * fun(x_a)/2)/ fun(x_b) - fun(x_a)/2
+
+        # Check if the above found point is root
+        if fun(x_c) <= eps:
+            return x_c, i
+         
+        # Decide the side to repeat the steps
+        elif fun(x_c) * fun(x_a) < 0:
+            x_b = x_c
+        else:
+            x_a = x_c
+    return "Zero not found", steps
 
 
-def puntofijo(gx,a,tolera, iteramax = 15):
-    i = 1 # iteración
-    b = gx(a)
-    tramo = abs(b-a)
-    while(tramo>=tolera and i<=iteramax ):
-        a = b
-        b = gx(a)
-        tramo = abs(b-a)
-        i = i + 1
-    respuesta = b
+def steffensen_algorithm(f, eps, steps):
+    while True:
+        x_n = float(input("Enter the starting point\n"))
+        if x_n == 0.0:
+            print("Initial value cannot be zero")
+        else:
+            break
     
-    # Validar respuesta
-    if (i>=iteramax ):
-        respuesta = np.nan
-    return(respuesta)
+    if abs(f(x_n)) < eps:
+        # found!
+        return x_n, 0
+
+    for i in range(steps):
+        g = (f(x_n + f(x_n))) / f(x_n) - 1
+        try:
+            x_n -= (f(x_n)) / (g * x_n)
+        except ZeroDivisionError:
+            return "Zero not found. Some division by zero was founded", steps
+        if abs(f(x_n)) < eps:
+            # found!
+            return x_n, i
     
+    return "Zero not found", steps

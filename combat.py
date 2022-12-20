@@ -221,7 +221,7 @@ class Combat:
                     break
 
             damage = self.calculateDamage(player, attack_selection-1)
-            if self.player1 == player:
+            if self.player1_in_combat == player:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
                 if self.player2_in_combat.life < 0 or (self.player1_states.__contains__("Culling Blade") and self.player2_in_combat.life <= damage):
                     self.end = True

@@ -140,7 +140,7 @@ class Combat:
         else:
             print(self.player2_states)
             print(f"{self.player1_in_combat.name}'s states:\n Life: {self.player1_in_combat.life}\n Damage: {self.player1_in_combat.damage}\n Epsilon: {self.player1_in_combat.epsilon}")
-            print(self.player2_states)
+            print(self.player1_states)
         action = input(f"Is the turn of {player.name}\nWhat do you like to do? \nAttack(1) \nUse Skill(2)")
 
 

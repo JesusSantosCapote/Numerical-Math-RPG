@@ -83,11 +83,11 @@ class Combat:
                     self.playTurn(self, self.player1_in_combat)
 
 
-    def calculateDamage(self, player : Player, attack_selected): #NOT IMPLEMENTED YET
+    def calculateDamage(self, player : Player, attack_selected):
         if player == self.player1:
-            damage = player.attacks[attack_selected](self.player2_armor,player.epsilon)
+            damage = player.attacks[attack_selected](self.player2_armor,player.epsilon,player.damage)
         else:
-            damage = player.attacks[attack_selected](self.player1_armor,player.epsilon)
+            damage = player.attacks[attack_selected](self.player1_armor,player.epsilon,player.damage)
         return damage
 
     def playTurn(self, player : Player):

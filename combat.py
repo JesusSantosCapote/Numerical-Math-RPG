@@ -39,7 +39,7 @@ class Combat:
         print("Time over. Now a random player will attack first")
         return random.choice([self.player1_in_combat,self.player2_in_combat])
 
-    def play(self):
+    def play(self): #TODO: Needs to return winner and loser
         while not self.end:
             print(f"{self.player1_in_combat.name}, what armor do you like to use?")
 

@@ -1,34 +1,34 @@
 class Player:
-    experience_threshold = () #Rellenar en algun punto
+    experience_threshold = [] # List of int, each position contains experiencie needed to reach index level
 
-    name = ''
+    name = '' #string
 
-    armors = []
+    armors = [] # List of Tuple: [function, string representation, level needed]
 
-    skills = []
+    skills = [] # List of Tuple: [function, string representation, level needed]
 
     __level = 1
 
     epsilon = 1e-2
 
-    @property
+    @property #float
     def life(self):
         raise NotImplementedError()
 
-    @property
+    @property #float
     def damage(self):
         raise NotImplementedError()
 
     @property
-    def level(self):
+    def level(self): #int
         return self.__level
 
     @property
-    def attacks(self):
+    def attacks(self):  # List of Tuple: [function, string representation, level needed]
         raise NotImplementedError()
 
     @property
-    def experience(self):
+    def experience(self): #int
         raise NotImplementedError()
 
     def level_up(self):

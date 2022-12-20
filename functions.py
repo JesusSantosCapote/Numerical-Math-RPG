@@ -4,7 +4,7 @@ def bisection(fun, x_a, x_b, eps=None, steps=10): #Para el warrior
     if fun(x_a) * fun(x_b) >= 0:
         print("The bisection method cannot be applied")
         return None
-    
+
     # Calculate number of stepds base on eps
     if eps is not None:
         steps = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))

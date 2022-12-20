@@ -48,21 +48,41 @@ def get_floating_trivia(arithmetic):
     arithmetic_min = arithmetic[0]**(arithmetic[2]-1)
     arithmetic_max = get_arithmetic_max(arithmetic)
 
-    num = random.uniform(arithmetic_min + 100, arithmetic_max + 100)
-    number = round(num, 5)
+    underflow_number = random.uniform(arithmetic_min - 20, arithmetic_min)
+
+    alpha = random.randint(0, 10)
+    normal_number = random.uniform(arithmetic_min, arithmetic_min + 10**alpha)
+
+    #generate numbers with negative exponents in his representation
+    number_of_zeros = ["0" for i in range(random.randint(1, 8))]
+    exp_neg_number = "0."
+    for i in number_of_zeros:
+        exp_neg_number = exp_neg_number + i
+    number_of_digits_taken = random.randint(1, 4)
+    normal_number_str = str(normal_number)
+    digits_of_normal = [normal_number_str[i] for i in range(number_of_digits_taken) if normal_number_str[i] != '.']
+    for i in digits_of_normal:
+        exp_neg_number = exp_neg_number + i
+    exp_neg_number = float(exp_neg_number)
+
+
+    number = random.choice([normal_number, exp_neg_number, underflow_number])
+
+    number_str = '{:f}'.format(number)
+    number = float(number_str)    
 
     if number > arithmetic_max:
-        a = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by truncation", "inf")
-        b = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "inf")
+        a = (f"What is the float of {number_str} in this arithmetic {arithmetic} if we assume rounding by truncation", "inf")
+        b = (f"What is the float of {number_str} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "inf")
         return random.choice([a, b])
 
     elif number < arithmetic_min:
-        a = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by truncation", "0")
-        b = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "0")
+        a = (f"What is the float of {number_str} in this arithmetic {arithmetic} if we assume rounding by truncation", "0")
+        b = (f"What is the float of {number_str} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "0")
         return random.choice([a, b])
 
     else:
-        number = float(number).__str__()
+        number = number_str
         comma_pos = number.index('.')
         first_digit_pos = 0
         for i in range(len(number)):
@@ -115,3 +135,6 @@ def get_floating_trivia(arithmetic):
 def generate_trivia():
     arithmetic = generate_arithmetic()
     return get_floating_trivia(arithmetic)
+
+
+print(generate_trivia())

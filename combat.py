@@ -148,13 +148,13 @@ class Combat:
                     if self.player2_in_combat.life<=0:
                         self.end = True
                         self.winner = self.player1
-                        print(f"That was an epic combat! {self.player1} has emerged victorious")
+                        print(f"That was an epic combat! {player.name} has emerged victorious")
                 else:
                     self.player1_in_combat.life = self.player1_in_combat.life - damage
                     if self.player1_in_combat.life <= 0:
                         self.end = True
                         self.winner = self.player2
-                        print(f"That was an epic combat! {self.player2} has emerged victorious")                      
+                        print(f"That was an epic combat! {player.name} has emerged victorious")                      
 
         elif action == '2':
             print('Select your skill. Select 0 to return')

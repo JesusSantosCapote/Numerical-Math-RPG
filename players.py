@@ -31,12 +31,12 @@ class Warrior(Player):
         self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1), (f5,"x^3 + 4",2), (f8,"x^2 - 5",3), (f9,"x^2 + x - 1",5), (f10,"x^2 + x - 4",8), (f14,"x^3 - 8",11), (f19,"x^3 + x^2 + x + 1",15)]
         self.skills = []
         self.level = 1
-        self.epsilon = 1e-3
-        self.life = 9
+        self.epsilon = 1e-5
+        self.life = 25
         self.damage = 10
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
-        self.experience_threshold = [0, 3, 8, 15, 25]
+        self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 
     def __str__(self) -> str:
         return f"Warrior of level {self.level}"
@@ -48,12 +48,12 @@ class Rogue(Player):
         self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1), (f8,"x^2 - 5",2), (f12,"x^2 + 3x - 2",4), (f13,"2x^2 + 4x - 8",5), (f14,"x^3 - 8",8), (f16, "x^3 + x^2 + 1",11), (f18,"x^3 + x^2 + x - 8",15)]
         self.skills = []
         self.level = 1
-        self.epsilon = 1e-3
-        self.life = 25
-        self.damage = 10
+        self.epsilon = 1e-2
+        self.life = 18
+        self.damage = 6
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
-        self.experience_threshold = [0, 3, 8, 15, 25]
+        self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 
     def __str__(self) -> str:
         return f"Rogue of level {self.level}"
@@ -64,12 +64,12 @@ class Wizard(Player):
         self.armors = [(f1,"y=x^2",1), (f2, "y=x^3",1), (f5,"x^3 + 4",2), (f9,"x^2 + x - 1",4), (f11,"x^2 + x - 3",6), (f16, "x^3 + x^2 + 1",8), (f17,"x^3 + x^2 - 4",12), (f20,"3x^3 + 2x^2 + 4x + 1",15)]
         self.skills = []
         self.level = 1
-        self.epsilon = 1e-3
-        self.life = 25
-        self.damage = 10
+        self.epsilon = 1e-4
+        self.life = 10
+        self.damage = 8
         self.attacks = [(bisection, "Bisection", 1), (newton, "Newton", 1)]
         self.experience = 0
-        self.experience_threshold = [0, 3, 8, 15, 25]
+        self.experience_threshold = [0, 1, 2, 4, 6, 8, 11, 14, 17, 20, 24, 28, 32, 36, 40 ]
 
     def __str__(self) -> str:
         return f"Wizard of level {self.level}"

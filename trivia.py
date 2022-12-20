@@ -1,6 +1,5 @@
 import random
 import math
-from numpy import format_float_scientific
 
 
 def generate_arithmetic():
@@ -29,14 +28,7 @@ def generate_arithmetic():
     return (10, precision, min_exp, max_exp)
 
 
-def get_representation(number, arithmetic):
-    """
-    Returns a tuple that in the first position has the representation of 
-    'number' in the arithmetic 'arithmetic' by truncation and in the 
-    second by rounding to the nearest float.
-    """
-
-    arithmetic_min = arithmetic[0]**(arithmetic[2]-1)
+def get_arithmetic_max(arithmetic):
     arithmetic_max = "."
 
     for i in range(arithmetic[1]):
@@ -44,10 +36,30 @@ def get_representation(number, arithmetic):
 
     arithmetic_max = arithmetic_max + "e" + str(arithmetic[3])
     arithmetic_max = float(arithmetic_max)
-
-    if number > arithmetic_max: return ("inf", "inf")
     
-    elif number < arithmetic_min: return ("0", "0")
+    return arithmetic_max
+
+
+def get_floating_trivia(arithmetic):
+    """
+    Generate a trivia about floating point representation of a number in an arithmetic
+    """
+
+    arithmetic_min = arithmetic[0]**(arithmetic[2]-1)
+    arithmetic_max = get_arithmetic_max(arithmetic)
+
+    num = random.uniform(arithmetic_min + 100, arithmetic_max + 100)
+    number = round(num, 5)
+
+    if number > arithmetic_max:
+        a = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by truncation", "inf")
+        b = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "inf")
+        return random.choice([a, b])
+
+    elif number < arithmetic_min:
+        a = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by truncation", "0")
+        b = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by the nearest float", "0")
+        return random.choice([a, b])
 
     else:
         number = float(number).__str__()
@@ -95,6 +107,11 @@ def get_representation(number, arithmetic):
         for item in closest:
             closest_result = closest_result + item
 
-        return (trunc_result, closest_result)
+        a = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by truncation", trunc_result)
+        b = (f"What is the float of {number} in this arithmetic {arithmetic} if we assume rounding by the nearest float", closest_result)
+        return random.choice([a, b])
 
-print(get_representation(0.0032, (10, 3, -9, 99)))
+
+def generate_trivia():
+    arithmetic = generate_arithmetic()
+    return get_floating_trivia(arithmetic)

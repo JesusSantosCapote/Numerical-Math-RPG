@@ -2,6 +2,7 @@ import keyboard
 import time
 import random
 from players import Player
+from trivia import generate_trivia
 import functions
 
 def to_dict(player):

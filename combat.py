@@ -101,17 +101,27 @@ class Combat:
     def calculateDamage(self, player : Player, attack_selected):
         if player == self.player1_in_combat:
             toprint, armor_value = player.attacks[attack_selected][0](self.player2_armor,player.epsilon,player.damage)
-            print(toprint)
+            print(f"The zero founded was {toprint}. \nIt was founded in {armor_value} steps.")
             damage = player.damage- armor_value
+            print(f"The attack caused a damage of {damage}")
         else:
             toprint, armor_value = player.attacks[attack_selected][0](self.player1_armor,player.epsilon,player.damage)
-            print(toprint)
+            print(f"The zero founded was {toprint}. \nIt was founded in {armor_value} steps.")
             damage = player.damage- armor_value
+            print(f"The attack caused a damage of {damage}")
         return damage
 
     def playTurn(self, player : Player):
+        print(f"{player.name}'s states:\n Life: {player.life}\n Damage: {player.damage}\n Epsilon: {player.epsilon}")
+        if player == self.player1_in_combat:
+            print(self.player1_states)
+            print(f"{self.player2_in_combat.name}'s states:\n Life: {self.player2_in_combat.life}\n Damage: {self.player2_in_combat.damage}\n Epsilon: {self.player2_in_combat.epsilon}")
+            print(self.player2_states)
+        else:
+            print(self.player2_states)
+            print(f"{self.player1_in_combat.name}'s states:\n Life: {self.player1_in_combat.life}\n Damage: {self.player1_in_combat.damage}\n Epsilon: {self.player1_in_combat.epsilon}")
+            print(self.player2_states)
         action = input(f"Is the turn of {player.name}\nWhat do you like to do? \nAttack(1) \nUse Skill(2)")
-        print(f"Your stats are:\n Life: {player.life}")
 
 
         if action == '1':
@@ -135,10 +145,12 @@ class Combat:
                     self.player2_in_combat.life = self.player2_in_combat.life - damage
                     if self.player2_in_combat.life<=0:
                         self.end = True
+                        print(f"That was an epic combat! {self.player1} has emerged victorious")
                 else:
                     self.player1_in_combat.life = self.player1_in_combat.life - damage
                     if self.player1_in_combat.life <= 0:
                         self.end = True
+                        print(f"That was an epic combat! {self.player2} has emerged victorious")                      
 
         elif action == '2':
             print('Select your skill. Select 0 to return')
@@ -178,10 +190,12 @@ class Combat:
                 self.player2_in_combat.life = self.player2_in_combat.life - damage
                 if self.player2_in_combat.life<0:
                     self.end = True
+                    print(f"That was an epic combat! {self.player1} has emerged victorious")
             else:
                 self.player1_in_combat.life = self.player1_in_combat.life - damage
                 if self.player1_in_combat.life < 0:
                     self.end = True
+                    print(f"That was an epic combat! {self.player2} has emerged victorious")
 
 
 

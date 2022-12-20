@@ -2,8 +2,8 @@ import math
 from scipy import misc
 
 def bisection(fun, eps, steps): #Para el warrior
-    x_a = float(input("Enter the first extreme of the interval"))
-    x_b = float(input("Enter the second extreme of the interval"))
+    x_a = float(input("Enter the first extreme of the interval\n"))
+    x_b = float(input("Enter the second extreme of the interval\n"))
     if fun(x_a) * fun(x_b) >= 0:
         print("The bisection method cannot be applied")
         return "Zero not found", steps
@@ -27,7 +27,7 @@ def bisection(fun, eps, steps): #Para el warrior
 
 
 def newton(fun, eps, steps):   #Este esta bueno para el Rogue porque es rapido
-    x_n = float(input("Enter the starting point"))
+    x_n = float(input("Enter the starting point\n"))
     for i in range(steps + 1):
         # Evaluación de la función para ver si el resultado es válido
         f_x = fun(x_n)

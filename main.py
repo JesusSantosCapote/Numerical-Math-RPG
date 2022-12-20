@@ -24,7 +24,7 @@ while not end:
 
         player1=load_profile(saved_profiles[selected_player - 1].split(".")[0])
 
-        print(f"First player selected was {player1.name}, a {player1.__str__()}")
+        print(f"First player selected was {player1.name}, a {player1.__str__()}, with {player1.experience} experience")
 
         print("Select second player:")
 
@@ -41,7 +41,7 @@ while not end:
                 print("Invalid Input")
         player2=load_profile(saved_profiles[selected_player2 - 1].split(".")[0])
 
-        print(f"Second player selected was {player2.name}, a {player2.__str__()} ")
+        print(f"Second player selected was {player2.name}, a {player2.__str__()}, with {player2.experience} experience")
 
         print("Now lets see an epic numerical math combat")
         combat = Combat(player1, player2)

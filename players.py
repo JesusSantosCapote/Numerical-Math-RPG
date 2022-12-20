@@ -18,12 +18,11 @@ class Player:
     def Clone (self):
         return Player(self.name, self.armors, self.skills, self.level, self.epsilon, self.life, self.damage, self.attacks, self.experience, self. experience_threshold)
 
-    def get_exp(self, experience_gained): #TODO: Check max level index
+    def get_exp(self, experience_gained): #TODO: Check max level index, gain stats per level
         self.experience = self.experience + experience_gained
         for i in range (len(self.experience_threshold)):
             if self.experience>self.experience_threshold[i]:
                 self.level = i+1
-                break
 
 class Warrior(Player):
     

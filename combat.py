@@ -4,6 +4,7 @@ import random
 from players import *
 from trivia import generate_trivia
 import functions
+from Tools import timed_imput
 
 
 class Combat:
@@ -34,24 +35,24 @@ class Combat:
 
     def get_answer(self, player, start_time, solution):
         actual_time = time.time()
-        while time.time() - actual_time < 30:
-            if solution == input():
-                return player
-            else:
-                wrong = True
-                print(f"Wrong answer, now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")   
-                break
-        if not wrong:
+        first_answer = timed_imput()
+        if first_answer == solution:
+            return player
+        elif first_answer == None:
             print(f"Time over. Now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")
+        else:
+            print(f"Wrong answer, now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")   
+
         left_time = 300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30
         actual_time = time.time()
-        while time.time() - actual_time < left_time:
-            if solution == input():
-                return self.player1_in_combat if player == self.player2_in_combat else self.player2_in_combat
-            else:
-                print("Wrong answer too. Now a random player will attack first")
-                return random.choice([self.player1_in_combat,self.player2_in_combat])
-        print("Time over. Now a random player will attack first")
+
+        second_answer = timed_imput(wait_time=left_time)
+        if second_answer == solution:
+            return self.player1_in_combat if player == self.player2_in_combat else self.player2_in_combat
+        elif second_answer == None:
+            print("Time over. Now a random player will attack first")
+        else:
+            print("Wrong answer too. Now a random player will attack first")
         return random.choice([self.player1_in_combat,self.player2_in_combat])
 
     def play(self): #TODO: Needs to return winner and loser
@@ -102,7 +103,7 @@ class Combat:
                     first_one_to_attack = self.get_answer(self.player2_in_combat,start_time,trivia[1])
                     break
                 if time.time() - start_time > 300:
-                    print("Now a random player will atack first")
+                    print("Time out. Now a random player will atack first")
                     first_one_to_attack = random.choice([self.player1_in_combat, self.player2_in_combat])
                     break
             self.playTurn(first_one_to_attack)

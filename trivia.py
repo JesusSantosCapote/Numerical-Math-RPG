@@ -137,4 +137,4 @@ def generate_trivia():
     return get_floating_trivia(arithmetic)
 
 
-print(generate_trivia())
+#print(generate_trivia())

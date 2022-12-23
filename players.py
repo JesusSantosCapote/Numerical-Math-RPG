@@ -29,7 +29,7 @@ class Warrior(Player):
     
     def __init__(self, name):
         self.name=name
-        self.armors = [(f1,"y = x^2",1), (f2, "y = x^3",1), (f5,"y = x^3 + 4",2), (f8,"y = x^2 - 5",3), (f9,"y = x^2 + x - 1",5), (f10,"y = x^2 + x - 4",8), (f14,"y = x^3 - 8",11), (f19,"y = x^3 + x^2 + x + 1",15)]
+        self.armors = [(f1,"y = x^2",1), (f21, "y = sen(x)",1), (f5,"y = x^3 + 4",2), (f8,"y = x^2 - 5",3), (f9,"y = x^2 + x - 1",5), (f10,"y = x^2 + x - 4",8), (f14,"y = x^3 - 8",11), (f19,"y = x^3 + x^2 + x + 1",15)]
         self.skills = [(increase_damage, "Damage Increaser *1.5",5), (culling_blade, "Culling Blade", 10), (graphic_vision, "Graphic Vision", 12)]
         self.level = 1
         self.epsilon = 1e-5
@@ -46,7 +46,7 @@ class Rogue(Player):
 
     def __init__(self, name):
         self.name=name
-        self.armors = [(f1,"y = x^2",1), (f2, "y = x^3",1), (f8,"y = x^2 - 5",2), (f12,"y = x^2 + 3x - 2",4), (f13,"y = 2x^2 + 4x - 8",5), (f14,"y = x^3 - 8",8), (f16, "y = x^3 + x^2 + 1",11), (f18,"y = x^3 + x^2 + x - 8",15)]
+        self.armors = [(f1,"y = x^2",1), (f22, "y = cos(x)",1), (f24,"y = x^(1/3)",2), (f12,"y = x^2 + 3x - 2",4), (f13,"y = 2x^2 + 4x - 8",5), (f14,"y = x^3 - 8",8), (f16, "y = x^3 + x^2 + 1",11), (f18,"y = x^3 + x^2 + x - 8",15)]
         self.skills = [(precision_debuff, "Precision debuffer", 5), (decrease_damage, "Damage decreaser",10), (graphic_vision, "Graphic Vision", 12)]
         self.level = 1
         self.epsilon = 1e-2
@@ -62,7 +62,7 @@ class Rogue(Player):
 class Wizard(Player):
     def __init__(self, name):
         self.name=name
-        self.armors = [(f1,"y = x^2",1), (f2, "y = x^3",1), (f5,"y = x^3 + 4",2), (f9,"y = x^2 + x - 1",4), (f11,"y = x^2 + x - 3",6), (f16, "y = x^3 + x^2 + 1",8), (f17,"y = x^3 + x^2 - 4",12), (f20,"y = 3x^3 + 2x^2 + 4x + 1",15)]
+        self.armors = [(f1,"y = x^2",1), (f23, "y = sen(x) + cos(x) + x",1), (f5,"y = x^3 + 4",2), (f9,"y = x^2 + x - 1",4), (f11,"y = x^2 + x - 3",6), (f16, "y = x^3 + x^2 + 1",8), (f17,"y = x^3 + x^2 - 4",12), (f20,"y = 3x^3 + 2x^2 + 4x + 1",15)]
         self.skills = [(precision_buff, "Precision buffer", 5), (heal, "Heal", 10), (graphic_vision, "Graphic Vision", 12)]
         self.level = 1
         self.epsilon = 1e-4

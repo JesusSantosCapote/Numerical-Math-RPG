@@ -1,4 +1,5 @@
 import math
+import numpy
 
 def f1(x):
     return x**2
@@ -47,3 +48,16 @@ def f19(x):
 
 def f20(x):
     return 3*(x**3) + 2*(x**2) + 4*x + 1
+
+def f21(x):
+    return math.sin(x)
+    
+def f22(x):
+    return math.cos(x)
+
+def f23(x):
+    return math.sin(x) + math.cos(x) + x
+
+def f24(x):
+    return x**(1. / 3.)
+

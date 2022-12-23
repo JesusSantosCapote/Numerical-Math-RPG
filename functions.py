@@ -8,10 +8,6 @@ def bisection(fun, eps, steps): #Para el warrior
     if fun(x_a) * fun(x_b) >= 0:
         print("The bisection method cannot be applied")
         return "Zero not found", steps
-    
-    steps_calculated = math.ceil(math.log((x_b - x_a) / eps) / math.log(2))
-    if steps_calculated >= steps:
-        return "Zero not founded" , steps
     # The bisection method
     for n in range(steps + 1):
         x_m = (x_a + x_b) / 2
@@ -146,3 +142,4 @@ def steffensen_algorithm(f, eps, steps):
             return x_n, i
     
     return "Zero not found", steps
+

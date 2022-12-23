@@ -182,6 +182,7 @@ class Combat:
 
         elif action == '2':
             print('Select your skill. Select 0 to return')
+            max_selection = 0
             for i in range(len(player.skills)):
                 if player.skills[i][2] > player.level:
                     break

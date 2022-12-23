@@ -1,3 +1,5 @@
+from Tools import graph_function
+
 def precision_debuff(combat, player):
     if combat.player1_in_combat == player:
         combat.player2_in_combat.epsilon /= 100
@@ -59,6 +61,18 @@ def culling_blade(combat, player):
     else:
         combat.player2_states.append("Culling Blade")
         combat.player2_in_combat.skills.remove((culling_blade, "Culling Blade",10 ))
+
+def graphic_vision(combat, player):
+
+    if combat.player1_in_combat == player:
+        combat.player1_states.append("Graphic Vision")
+        graph_function(combat.player2_armor,range(int(input("Give a range to graph. First extreme:")),int(input("Second extreme:"))),"black")
+        combat.player1_in_combat.skills.remove((graphic_vision, "Graphic Vision",12 ))
+
+    else:
+        combat.player2_states.append("Graphic Vision")
+        graph_function(combat.player1_armor,range(int(input("Give a range to graph. First extreme:")),int(input("Second extreme:"))),"black")
+        combat.player2_in_combat.skills.remove((graphic_vision, "Graphic Vision", 12 ))
 
 
 

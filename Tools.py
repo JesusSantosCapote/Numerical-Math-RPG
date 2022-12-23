@@ -1,5 +1,8 @@
 import msvcrt
 import time
+from matplotlib import pyplot
+from armors import *
+from PIL import Image
 def timed_imput(message : str = ">>>", wait_time = 30):
     entrance=""
     print(message)    
@@ -13,8 +16,11 @@ def timed_imput(message : str = ">>>", wait_time = 30):
                 entrance += char
     return None
 
-#string = timed_imput()
-#if string == None:
-#    print("Es igual a None")
-#if string == "":
-#    print("Es igual a cadena vacía")
+def graph_function (func, range, selected_color):
+    pyplot.plot(range, [func(i) for i in range])
+    pyplot.axhline(0, color=selected_color)
+    pyplot.axvline(0, color=selected_color)
+    pyplot.xlim(-10, 10)
+    pyplot.ylim(-10, 10)
+    pyplot.savefig("output.png")
+    pyplot.show()

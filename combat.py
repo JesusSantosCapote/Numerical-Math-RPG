@@ -42,6 +42,7 @@ class Combat:
         actual_time = time.time()
         first_answer = timed_imput()
         if first_answer == solution:
+            print("Great. Your answer is correct")
             return player
         elif first_answer == None:
             print(f"Time over. Now {self.player2_in_combat.name if player == self.player1_in_combat else self.player1_in_combat.name} can answer it in {300 - (time.time() - start_time) if 300 - (time.time() - start_time) > 0 else 30} seconds")
@@ -53,6 +54,7 @@ class Combat:
 
         second_answer = timed_imput(wait_time=left_time)
         if second_answer == solution:
+            print("Great. Your answer is correct")
             return self.player1_in_combat if player == self.player2_in_combat else self.player2_in_combat
         elif second_answer == None:
             print("Time over. Now a random player will attack first")

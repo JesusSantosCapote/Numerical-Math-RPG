@@ -5,6 +5,7 @@ from players import *
 from trivia import generate_trivia
 import functions
 from Tools import timed_imput
+from matplotlib import pyplot
 
 
 class Combat:
@@ -21,10 +22,14 @@ class Combat:
 
     def clean_status(self, player: Player):
         if player == self.player1_in_combat:
+            if self.player1_states.__contains__("Graphic Vision"):
+                pyplot.close()
             self.player1_states.clear()
             self.player1_in_combat.damage = self.player1.damage
             self.player1_in_combat.epsilon = self.player1.epsilon
         else:
+            if self.player2_states.__contains__("Graphic Vision"):
+                pyplot.close()
             self.player2_states.clear()
             self.player2_in_combat.damage = self.player2.damage
             self.player2_in_combat.epsilon = self.player2.epsilon
@@ -55,7 +60,7 @@ class Combat:
             print("Wrong answer too. Now a random player will attack first")
         return random.choice([self.player1_in_combat,self.player2_in_combat])
 
-    def play(self): #TODO: Needs to return winner and loser
+    def play(self):
         while not self.end:
             print(f"{self.player1_in_combat.name}, what armor do you like to use?")
 
